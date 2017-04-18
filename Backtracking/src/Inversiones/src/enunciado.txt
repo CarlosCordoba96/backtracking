@@ -1,0 +1,28 @@
+Obtener la mejor forma de invertir N unidades de dinero en K entidades bancarias, sabiendo el beneficio que cada una genera.
+En nuestro ejemplo N=4 y K=3, teniendo una matriz m de ganancias:
+
+Monedas/Banco	B1	B2	B3
+	  1			2	1	1	
+	  2			5	3	4
+	  3			6	6	5
+	  4			7	7	8
+	  
+a) Idea de la solución:
+
+Calcular todas las combinaciones posibles de invertir cada uno de los millones en cada banco y quedarnos con la solución que más
+ganacias produzca.
+
+b) Datos de entrada & Forma de la solución:
+
+Datos de entrada: Una variable entera etapa; un vector solución de tamaño K; un vector solOp de tamaño k.
+Forma de la solución: Un vector de tamaño K, donde cada celda indique los millones N invertidos en cada banco K.
+
+c) Árbol de búsqueda
+
+										/-/-/-/
+							0-/-/-/	 1-/-/-/	2-/-/-/	 3-/-/-/ ....
+					0-0-/-/	 0-1-/-/ ...
+					
+Etapa: Millones invertidos en cada banco & Arista: Millones a invertir
+
+d) Backtracking & Forwarding

@@ -1,0 +1,29 @@
+Dada una mochila con una capacidad de 18 kg, que puedo llenar con cajas de distinto peso, encontrar la combinación
+que me permita llevar el máximo número de objetos sin exceder el peso.
+
+a) Idea del algoritmo
+
+Encontrar todas las combinciones posibles de objetos que llevar en la mochila sin exceder el peso máximo y quedarnos con la combinación
+que más objetos contenga con el menor peso posible.
+
+b) Datos de entrada y forma de la solución:
+
+Datos de entrada: 
+
+-Una matriz m, donde la primera fila son los pesos y la segunda fila el valor, ambos de cada objeto
+-Un entero peso con el máximo peso que soporta la mochila
+
+Forma de la solución:
+
+-Un vector de enteros sol, que lleva un 1 si he metido objeto y on 0 en caso contrario.
+
+c) Grafo 
+
+Inicial:				[][][]
+Objeto 1:        [0][][]	  [1][][]
+....
+
+Etapa: Objetos metidos en la mochila
+Arista: Meter o no un objeto
+
+d) Backtracking

@@ -1,0 +1,29 @@
+Se tiene una diana con i regiones distintas. Cada una con una puntuación Ri (por ejemplo, 6 regiones de valores que sean 
+10,10,25,25,50,75) junto con D dardos (por ejemplo 5). Se desea saber a qué regiones hay que lanzar los dardos para obtener
+una cierta puntuación P (por ejemplo 100). 
+
+a) Idea del algoritmo
+
+-Hayar todas las combinaciones de regiones que den una puntuación igual a la seleccionada y quedarnos con la que se haga en menos
+dardos
+
+b) 
+
+Datos de entrada:
+
+-Un vector con las distintas puntuaciones posibles.
+-Un numero de dardos
+-Puntuación goal.
+
+Forma de la solución: Vector de tamaño número de dardos que indica que puntuación se ha hecho en cada tirada
+
+c) Árbol de búsqueda
+
+							[][][][][]
+	[0][]...  	[10][]....	[25][]...	[50][]...	[75][]....
+	
+Nivel: Dardo lanzado
+Arista: Puntuación obtenida
+Poda: Alcanzar goal
+
+d) Backtracking & primera llamada

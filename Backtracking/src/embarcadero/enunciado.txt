@@ -1,0 +1,43 @@
+Diapositiva 74 del tema 2
+
+Sobre el río Guadalhorce hay n embarcaderos.
+En cada uno de ellos se puede alquilar un bote que permite ir a cualquier otro embarcadero río abajo(es imposible ir río arriba).
+Existeunatabladetarifasqueindicaelcostedelviajedelembarcaderoialjparacualquierembarcaderodepartidaiycualquierembarcaderodellegadajmásabajoenelrío(i<j).Puedesucederqueunviajedeiajseamáscaroqueunasucesióndeviajesmáscortos,encuyocasosetomaríaunprimerbotehastaunembarcaderokyunsegundoboteparacontinuarapartirdek.Nohaycosteadicionalporcambiardebote.
+Nuestroproblemaconsisteendiseñarunalgoritmoeficientequedetermineelcostemínimoparacadapardepuntosi,j(i<j)ydeterminar,enfunciónden,eltiempoempleadoporelalgoritmo.
+EL VIAJE MÁS BARATO POR EL RÍO
+
+Apartados:
+
+a) Idea del algoritmo en pseudocódigo
+
+Hacer todas las combinaciones posibles para llegar al embarcadero destino y quedarnos con la solución más barata
+
+b) Datos de entrada & Forma de la solución
+
+Entrada: Matriz "p" con los precios de viajar de un embarcadero a otro dónde infinito representa que no hay comunicación entre los embarcaderos.
+
+	A B C D
+A   0 1 4 6
+B	i 0 3 3
+C	i i 0 1
+D	i i i 0
+
+Salida: Vector de 3 posiciones, dónde cada posición representa un embarcadero y un 1 representa que se ha pasado por dicho embarcadero y un 0 representa lo contrario
+
+c) Árbol de búsqueda (Solo se va de un nodo a otro)/ Grafo multietápico (se puede ir al mismo nodo desde varios nodos distintos)
+
+Nivel: Travesía de un embarcadero a otro
+Arista: Pasar o no por un embarcadero
+
+							---
+			0--								1--
+	00-				01-				10-				11-
+000		001		010		011		100		101		110		111
+
+d) Código Java que resuelve el problema
+
+En clases
+
+e) Primera llamada
+
+Método Init()
