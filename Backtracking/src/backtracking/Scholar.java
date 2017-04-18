@@ -49,7 +49,7 @@ public class Scholar {
 		int j=0;
 		Scanner sc = null;
 		try {
-			sc = new Scanner(new File ("InversionsTest_0.dat"));
+			sc = new Scanner(new File ("Fellowships1.dat"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -57,6 +57,7 @@ public class Scholar {
 		
 		Beca [] data=new Beca[n];
 		while(sc.hasNext()){
+			sc.nextInt();
 			start_month= sc.nextInt();
 			end_month= sc.nextInt();
 			money=sc.nextInt();
