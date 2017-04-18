@@ -7,7 +7,7 @@ public class Mochila {
 	
 	public Mochila(int s){
 		objetos=init();
-		s=size;
+		size=s;
 	}
 	
 	private int[][] init(){
@@ -27,20 +27,26 @@ public class Mochila {
 		for(i=0;i<v.length;i++){
 			System.out.print(v[i]);
 		}
+		System.out.println();
 	}
 	
 	public void back(int etapa,int[]sol,int[]solOp){
 		if(etapa==sol.length){ //El caso base es cuando tengo una combinación de objetos
-			if(esMejor(sol,solOp)){
-				System.arraycopy(sol, 0, solOp, 0, sol.length);
+			if(calcularpeso(sol)<=size){
+				if(esMejor(sol,solOp)){
+					System.arraycopy(sol, 0, solOp, 0, sol.length);
+					
+					printSol(solOp);
+				}
+				
 			}
-			printSol(solOp);
+			
 		}else{
 			for (int i = 0; i <= 1; i++) {
-				if (puedometer(sol, etapa, i)){
+				
 					sol[etapa] = i;
 					back(etapa + 1, sol, solOp);
-				}
+				
 			}
 		}
 	}
@@ -55,12 +61,26 @@ public class Mochila {
 		
 		return (peso <= size);
 	}
+	private int calcularpeso(int [] s){
+		int acum=0;
+		int i;
+		for(i=0;i<s.length;i++){
+			acum+=objetos[0][i] * s[i];
+		}
+		return acum;
+	}
+	private int calcularvalor(int [] s){
+		int acum=0;
+		int i;
+		for(i=0;i<s.length;i++){
+			acum+=objetos[1][i] * s[i];
+		}
+		return acum;
+	}
 	private boolean esMejor(int[]s,int[]so){
 		int valor=0,valorOp=0;
-		for(int i=0;i<s.length;i++){
-			valor+=objetos[1][i] * s[i];
-			valorOp+=objetos[1][i] * so[i];
-		}
+		valor=calcularvalor(s);
+		valorOp=calcularvalor(so);
 		return valor>valorOp;
 	}
 }

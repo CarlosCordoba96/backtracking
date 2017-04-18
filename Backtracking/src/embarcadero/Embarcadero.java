@@ -36,15 +36,21 @@ public class Embarcadero {
 	private int CalculaPrecioTotal(int sol []){
 		int suma=0;
 		int fila=0;
-		int i;
-		for(i=0;i<sol.length - 1;i++){ //En un principio no tratamos la última posición
-			if(sol[i]==1){
-				suma+=precios[fila][i+1];
-				fila=i+1;
+		if(sol[0]==-1){
+			suma=Integer.MAX_VALUE;
+		}else{
+			
+			int i;
+			for(i=0;i<sol.length - 1;i++){ //En un principio no tratamos la última posición
+				if(sol[i]==1){
+					suma+=precios[fila][i+1];
+					fila=i+1;
+				}
 			}
+			//Ahora comprobamos si la última es 1 y lo añadimos
+			suma+=precios[fila][sol.length ];
 		}
-		//Ahora comprobamos si la última es 1 y lo añadimos
-		suma+=precios[fila][sol.length -1];
+		
 		return suma;
 	}
 	

@@ -23,10 +23,17 @@ public class Diana {
 			sol[i]=0;
 			solOp[i]=0;
 		}
-		back(0,sol,solOp);
+		//back(0,sol,solOp);
+		//printSol(solOp);
+		for(int i=0;i<sol.length;i++){
+			sol[i]=0;
+			solOp[i]=0;
+		}
+		backCarlos(0,sol,solOp,0);
 		printSol(solOp);
 	}
 	private void back(int etapa, int[]sol,int [] solOp){
+
 		int suma=0;
 		for(int i=0;i<sol.length;i++){
 			suma+=sol[i];
@@ -44,7 +51,28 @@ public class Diana {
 			}
 		}
 	}
-    private void printSol (int [] sol) {
+    
+	private void backCarlos(int etapa,int[]sol,int []solOp,int suma){
+		int i;
+		if(etapa==dardos){
+			if(suma==goal){
+				printSol(sol);
+				System.arraycopy(sol,0,solOp,0, sol.length);
+		}
+		}
+		else{
+			
+				for(i=0;i<puntuaciones.length;i++){
+					sol[etapa]=puntuaciones[i];
+					suma+=puntuaciones[i];
+					backCarlos(etapa+1,sol,solOp,suma);
+					suma-=puntuaciones[i];
+				}
+			
+		}
+
+	}
+	private void printSol (int [] sol) {
         for (int i = 0; i < sol.length; i++) {
             System.out.print(sol[i] + " ");
        }

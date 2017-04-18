@@ -28,9 +28,9 @@ public class Banco {
 			if(esMejor(sol,solOp)){ //El segundo if es siempre la comparación
 				System.arraycopy(sol, 0, solOp, 0, sol.length);
 			}
-			printSol(solOp);
+			printSol(sol);
 		}else{
-			for(i=0;i<=4;i++){//4 porque son todas las combinaciones posibles de inversión en cada etapa: invertir 0,1,2 o 3
+			for(i=0;i<=3;i++){//4 porque son todas las combinaciones posibles de inversión en cada etapa: invertir 0,1,2 o 3
 				//Ahora la poda, que es que sólo puedo invertir un máximo de 3 millones en nuestro ejemplo, por lo que
 				//si ya llevo 3 invertidas no tengo que seguir mirando otras soluciones
 				if(esPosible(sol,etapa,i)){
@@ -47,14 +47,14 @@ public class Banco {
 		for(j=0;i<etapa;i++){
 			acumulado+=sol[i];
 		}
-		return ((acumulado+1)<=4);
+		return ((acumulado+1)<=3);
 	}
 	
 	private boolean esMejor(int [] sol, int [] solOp){
 		int acumSol=0, acumOp=0,i;
 		for(i=0;i<sol.length;i++){
 			acumSol=inversiones[sol[i]][i];
-			acumSol=inversiones[solOp[i]][i];
+			acumOp=inversiones[solOp[i]][i];
 		}
 		return acumSol>acumOp;
 	}
