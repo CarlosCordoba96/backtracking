@@ -2,8 +2,8 @@ package cambio;
 
 public class Main {
 	//Dados unos tipos de monedas con un nº infinito de ellas calcular el cambio de una cantidad en fordward y backward
-	private static int []monedas={5,2,1};
-	private static int cantidad=22;
+	private static int []monedas={3,2,1};
+	private static int cantidad=7;
 	
 	public static void main(String[] args){
 		int [] sol=new int[monedas.length];

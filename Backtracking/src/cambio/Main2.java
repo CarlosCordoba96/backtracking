@@ -16,7 +16,7 @@ public class Main2 {
 	  }
 	  reverse(monedas);
 	  Examen e=new Examen(monedas,cantidad);
-	  e.forward(cantidad,monedas,sol);
+	  e.forward1(sol);
 	  printsol(sol);
 	 }
 	 
@@ -35,10 +35,10 @@ public class Main2 {
 	 private static void printsol(int[]sol){
 	  System.out.println("El cambio para "+cantidad+" ha sido: ");
 	  for(int i=0;i<sol.length;i++){
-	//   if(sol[i]==Integer.MAX_VALUE){
-//	    System.out.println("No ha sido posible encontrar solucion");
-//	    break;
-	//   }
+	   if(sol[i]==Integer.MAX_VALUE){
+	    System.out.println("No ha sido posible encontrar solucion");
+	    break;
+	   }
 	   System.out.println(sol[i]+" monedas de  "+monedas[i]);
 	  }
 	 }

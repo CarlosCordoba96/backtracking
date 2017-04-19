@@ -48,7 +48,7 @@ public class Examen {
 		return sum;
 	}
 	private boolean esmejor(int []sol,int[]solopt){
-		return contar(sol)<contar(solopt);
+		return contar(sol)<=contar(solopt);
 	}
 	private boolean esposible(int sol[],int etapa,int moneda){
 		int [] aux=new int[sol.length];
@@ -70,25 +70,27 @@ public class Examen {
 			System.out.println(sol[i]+" monedas de  "+monedas[i]);
 		}
 	}
-	
-	void forward(int cambio, int[]monedas,int[] sol){
-		boolean encontrado =false;
-		int i = 0;
-		int acumulado=0;
-		while (i<monedas.length && !encontrado){
-			do {
-				acumulado+=monedas[i];
-				sol[i]++;
-			}while(acumulado<cambio);
-			if (acumulado==cambio)
-				encontrado=true;
-			else {
-				acumulado-=monedas[i];
-				sol[i]--;
+
+	public void forward1(int []sol){
+		int i=0;
+		boolean found=false;
+		int acum=0;
+		while (i<monedas.length && !found){//no nos salgamos del array y no encontremos solucion
+			for(;acum<cambio;sol[i]=sol[i]+1){//mientras lo acumulado sea menos que el cambio vamos metiendo en sol[i] mas monedas
+				acum+=monedas[i];
+			}
+			if (acum==cambio)//	Encontramos solucion
+				found=true;
+			else {// la solucion no se ha encontrado entonces eliminamos lo acumulado y lo ultimo metido
+				acum-=monedas[i];
+				sol[i]=sol[i]-1;
 				i++;
 			}
-				
+			
 		}
 	}
+	
+	
+	
 
 }
