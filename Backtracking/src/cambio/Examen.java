@@ -1,5 +1,7 @@
 package cambio;
 
+import java.util.Arrays;
+
 public class Examen {
 	private int [] monedas;
 	private int cambio;
@@ -68,4 +70,25 @@ public class Examen {
 			System.out.println(sol[i]+" monedas de  "+monedas[i]);
 		}
 	}
+	
+	void forward(int cambio, int[]monedas,int[] sol){
+		boolean encontrado =false;
+		int i = 0;
+		int acumulado=0;
+		while (i<monedas.length && !encontrado){
+			do {
+				acumulado+=monedas[i];
+				sol[i]++;
+			}while(acumulado<cambio);
+			if (acumulado==cambio)
+				encontrado=true;
+			else {
+				acumulado-=monedas[i];
+				sol[i]--;
+				i++;
+			}
+				
+		}
+	}
+
 }
