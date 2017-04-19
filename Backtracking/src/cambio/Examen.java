@@ -13,6 +13,7 @@ public class Examen {
 		int i;
 		if(etapa==sol.length){
 			if(calcular(sol)==cambio){
+				//printsol(sol);
 				if(esmejor(sol,solopt)){
 					System.arraycopy(sol, 0, solopt,0,sol.length);
 				}
@@ -56,5 +57,15 @@ public class Examen {
 			acum+=aux[i];
 		}		
 		return acum<=cambio;
+	}
+	private  void printsol(int[]sol){
+		System.out.println("El cambio para "+cambio+" ha sido: ");
+		for(int i=0;i<sol.length;i++){
+			if(sol[i]==Integer.MAX_VALUE){
+				System.out.println("No ha sido posible encontrar solucion");
+				break;
+			}
+			System.out.println(sol[i]+" monedas de  "+monedas[i]);
+		}
 	}
 }
