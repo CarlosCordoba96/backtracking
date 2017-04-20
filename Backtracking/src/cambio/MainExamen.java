@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class MainExamen {
 	//Dados unos tipos de monedas con un nº infinito de ellas calcular el cambio de una cantidad en fordward y backward
-	private static int []monedas={8,2,1};
-	private static int cantidad=34;
+	private static int []monedas={1,3,2,4};
+	private static int cantidad=90;
 
 	public static void main(String[] args){
 		
@@ -19,7 +19,6 @@ public class MainExamen {
 
 	static void reiniciar(int[]sol,int[]solopt){
 		for(int i=0;i<solopt.length;i++){
-			solopt[i]=Integer.MAX_VALUE;
 			sol[i]=0;
 		}
 	}
@@ -44,7 +43,7 @@ public class MainExamen {
 		int [] sol=new int[monedas.length];
 		int [] solopt=new int[monedas.length];
 		for(int i=0;i<solopt.length;i++){
-			solopt[i]=Integer.MAX_VALUE;
+			solopt[i]=999;
 		}
 		e.back(0, sol, solopt);
 		printsol(solopt);

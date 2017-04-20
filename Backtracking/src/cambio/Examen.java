@@ -71,26 +71,23 @@ public class Examen {
 		}
 	}
 
-	public void forward1(int []sol){
+	public void forward1(int []sol){//Encuentra la solucion optima ya que ordenamos la matriz de mayor a menor
 		int i=0;
 		boolean found=false;
 		int acum=0;
-		while (i<monedas.length && !found){//no nos salgamos del array y no encontremos solucion
+		while (i<monedas.length && !found){//mientras no nos salgamos del array y no encontremos solucion
 			for(;acum<cambio;sol[i]=sol[i]+1){//mientras lo acumulado sea menos que el cambio vamos metiendo en sol[i] mas monedas
-				acum+=monedas[i];
+				acum=acum+monedas[i];
 			}
 			if (acum==cambio)//	Encontramos solucion
 				found=true;
-			else {// la solucion no se ha encontrado entonces eliminamos lo acumulado y lo ultimo metido
-				acum-=monedas[i];
+			else {// la solucion no se ha encontrado entonces eliminamos lo acumulado y lo ultimo metido y vamos a mirar con otro tipo de monedas
+				acum=acum-monedas[i];
 				sol[i]=sol[i]-1;
 				i++;
 			}
-			
 		}
 	}
-	
-	
 	
 
 }
