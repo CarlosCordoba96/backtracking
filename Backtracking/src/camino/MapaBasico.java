@@ -3,40 +3,47 @@ package camino;
 import java.util.ArrayList;
 
 public class MapaBasico {
-	private Grafo<ciudad,Integer> mapa;
+	private Grafo<Ciudad,Integer> mapa;
 
-	class ciudad{
+	public class Ciudad{
 
 		int nombre;
 		int coste;
-		ciudad vieneDe;
-		ciudad(int n){
+		Ciudad vieneDe;
+		Ciudad(int n){
 			nombre=n;
 			coste=99999;
 			vieneDe=null;
 		}
 		public int coste(){ return coste; }
 		public void coste(int c){ coste=c; }
-		public ciudad vieneDe(){ return vieneDe;}
-		public void vieneDe(ciudad c){vieneDe=c;}
+		public Ciudad vieneDe(){ return vieneDe;}
+		public void vieneDe(Ciudad c){vieneDe=c;}
 		public boolean equals(Object c){
-			return (c instanceof ciudad) && ((ciudad)c).nombre==nombre;
+			return (c instanceof Ciudad) && ((Ciudad)c).nombre==nombre;
 		}
 		public String toString(){
 			return nombre+" coste "+coste()+" vieneDe "+vieneDe();
 		}
-	}//ciudad
-	public void forward(ciudad primera){//recorrido anchura
-		ArrayList<ciudad> anchura=new ArrayList<ciudad>();
+		public void inicializar(){
+			
+			Ciudad c1= new Ciudad(1);
+		}
+	}//Ciudad
+	
+	
+	
+	public void forward(Ciudad primera){//recorrido anchura
+		ArrayList<Ciudad> anchura=new ArrayList<Ciudad>();
 		primera.coste(0);
 		anchura.add(primera);
-		ArrayList<ciudad> ciudades=mapa.vertices();
+		ArrayList<Ciudad> Ciudades=mapa.vertices();
 		int c=0;
-		while(c<ciudades.size()){//recorrrido en anchura
-			ciudad estoy=anchura.get(c);
-			ArrayList<ciudad> ady=mapa.adyacentes(estoy);
+		while(c<Ciudades.size()){//recorrrido en anchura
+			Ciudad estoy=anchura.get(c);
+			ArrayList<Ciudad> ady=mapa.adyacentes(estoy);
 			for(int k=0;k<ady.size();k++){
-				ciudad voy=ady.get(k);
+				Ciudad voy=ady.get(k);
 				if(!anchura.contains(voy)){
 					anchura.add(voy);
 				}
@@ -52,14 +59,14 @@ public class MapaBasico {
 	private boolean mejor(int a,int b){
 		return a<b;
 	}
-	public int backward(ciudad estoy,ArrayList<ciudad> visitados){//recorrido profundidad
+	public int backward(Ciudad estoy,ArrayList<Ciudad> visitados){//recorrido profundidad
 		visitados.add(estoy);
 		if(!calculado(estoy)){
-			ArrayList<ciudad> ady=mapa.adyacentes(estoy);
+			ArrayList<Ciudad> ady=mapa.adyacentes(estoy);
 			if (ady.isEmpty()) estoy.coste(0);//ultimo vertice
 			else
 				for(int k=0;k<ady.size();k++){
-					ciudad voy=ady.get(k);
+					Ciudad voy=ady.get(k);
 					int costo=backward(voy,visitados);
 					if (mejor(costo+mapa.peso(estoy,voy), estoy.coste())){
 						estoy.coste(costo+mapa.peso(estoy,voy));
@@ -70,7 +77,7 @@ public class MapaBasico {
 		return estoy.coste();
 	}//back
 	
-	public boolean calculado(ciudad c){
+	public boolean calculado(Ciudad c){
 		return c.coste()<99999;
 		}
 }
