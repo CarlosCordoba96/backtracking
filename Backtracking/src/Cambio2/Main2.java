@@ -1,5 +1,4 @@
 package Cambio2;
-
 import java.util.ArrayList;
 
 /*
@@ -14,20 +13,15 @@ import java.util.ArrayList;
 	
 */
 
-public class Main {
+public class Main2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int cantidad=10;
-		int [][] monedas=new int[2][3];
-		monedas[0][0]=1;
-		monedas[0][1]=2;
-		monedas[0][2]=4;
-		monedas[1][0]=5;
-		monedas[1][1]=3;
-		monedas[1][2]=2;
-		Cartera c=new Cartera(monedas,cantidad);
-		System.out.println("Solucion para "+cantidad+" monedas");
-		c.forwardSinMemo();
+		int cantidad=16;
+		ArrayList<Integer> monedas= new ArrayList<Integer>();
+		monedas.add(5);
+		monedas.add(2);
+		monedas.add(1);
+		new Maquina(cantidad,monedas);
 	}
 }

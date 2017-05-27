@@ -1,16 +1,19 @@
 package embarcadero;
 
+import java.util.ArrayList;
+
+import map.City;
 
 /*
- * Esta clase contiene la matriz de precios que es el dato de entrada como único atributo.
+ * Esta clase contiene la matriz de precios que es el dato de entrada como ï¿½nico atributo.
  * 
- * La primera vez Sol se tiene que copiar a SolOptima indistantemente de lo que tenga; en los demás casos se copia
- * sólo si es mejor que la otra. Por tanto al inicializar Sol y SolOptima debe estar inicializada a -1 para poder interpretar
+ * La primera vez Sol se tiene que copiar a SolOptima indistantemente de lo que tenga; en los demï¿½s casos se copia
+ * sï¿½lo si es mejor que la otra. Por tanto al inicializar Sol y SolOptima debe estar inicializada a -1 para poder interpretar
  * ese caso.
  * */
 public class Embarcadero {
 	private int precios[][];
-	
+	private ArrayList<Balsa> balsas;
 	public Embarcadero(int precios [][]){
 		this.precios=precios;
 		Init();
@@ -18,7 +21,8 @@ public class Embarcadero {
 	
 	//Apartado d)
 	private void Init(){
-		int [] Sol = new int[precios.length -1]; //Esta está todo a 0, por lo que no es necesario inicializarla
+		balsas = putBalsas();
+		int [] Sol = new int[precios.length -1]; //Esta estï¿½ todo a 0, por lo que no es necesario inicializarla
 		int [] SolOptima = new int[Sol.length];
 		
 		for(int i=0;i<Sol.length;i++){
@@ -31,6 +35,8 @@ public class Embarcadero {
 			System.out.print(SolOptima[j]+" ");
 		}
 		System.out.println("Precio: "+CalculaPrecioTotal(SolOptima));
+		System.out.println(forward());
+		System.out.println(backward(3));
 	}
 	
 	private int CalculaPrecioTotal(int sol []){
@@ -41,13 +47,13 @@ public class Embarcadero {
 		}else{
 			
 			int i;
-			for(i=0;i<sol.length - 1;i++){ //En un principio no tratamos la última posición
+			for(i=0;i<sol.length - 1;i++){ //En un principio no tratamos la ï¿½ltima posiciï¿½n
 				if(sol[i]==1){
 					suma+=precios[fila][i+1];
 					fila=i+1;
 				}
 			}
-			//Ahora comprobamos si la última es 1 y lo añadimos
+			//Ahora comprobamos si la ï¿½ltima es 1 y lo aï¿½adimos
 			suma+=precios[fila][sol.length ];
 		}
 		
@@ -78,7 +84,7 @@ public class Embarcadero {
 	
 	private boolean esPosible(int sol [], int etapa, int value){
 		boolean posible = true;
-		if(etapa==sol.length - 1){//Si estamos en la última etapa
+		if(etapa==sol.length - 1){//Si estamos en la ï¿½ltima etapa
 			if(value==0){
 				posible=false;
 			}
@@ -86,4 +92,60 @@ public class Embarcadero {
 		return posible;
 		//Etapa apunta a DONDE VAMOS A ESCRIBIR, value = lo que quiero meter en etapa
 	}
+	private ArrayList<Balsa> getBalsas(){
+		return balsas;
+	}
+	private Balsa forward(){
+		int x=0;
+		while(x<precios[0].length){
+			Balsa b=getBalsas().get(x);
+			ArrayList<Balsa>ady=adyacentes(b);
+			for(int i=0;i<ady.size();i++){
+				Balsa aux=ady.get(i);
+				if(aux.getCost()==0|| b.getCost() + precios[b.getId()][aux.getId()]<aux.getCost()){
+					aux.setCost(b.getCost() + precios[b.getId()][aux.getId()]);
+					aux.setNext(b);
+				}
+			}		
+		x++;	
+		}
+		return getBalsas().get(precios[0].length-1);
+	}
+	
+	private Balsa backward(int n){
+		Balsa b=getBalsas().get(n);
+		if(b.getCost()==0){
+			ArrayList<Balsa>ady=adyacentes(b);
+			for(int i=0;i<ady.size();i++){
+				Balsa aux=ady.get(i);
+				if(aux.getCost()==0|| b.getCost() + precios[b.getId()][aux.getId()]<aux.getCost()){
+					aux.setCost(b.getCost() + precios[b.getId()][aux.getId()]);
+					aux.setNext(b);
+				}
+			}
+			
+		}		
+		return b;
+	}
+	
+	
+	private ArrayList<Balsa> putBalsas(){
+		ArrayList<Balsa> balsa = new ArrayList<Balsa>();
+		for(int i = 0; i < precios[0].length; i++){
+			balsa.add(new Balsa(i));
+		}
+		return balsa;
+	}
+	
+	
+	private ArrayList<Balsa> adyacentes (Balsa c){
+		ArrayList<Balsa> adjacents = new ArrayList<Balsa>();
+		for(int i = 0; i < precios[0].length; i++){
+			if(precios[c.getId()][i] > 0)
+				adjacents.add(balsas.get(i));
+		}
+		return adjacents;
+	}
+	
+	
 }
