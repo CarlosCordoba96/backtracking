@@ -13,7 +13,7 @@ public class Mochila {
 	private int[][] init(){
 		int [][] mochila = new int [2][3];
 		mochila[0][0] = 10; //El objeto 0 pesa 10
-		mochila[0][1] = 10;
+		mochila[0][1] = 3;
 		mochila[0][2] = 5;
 		mochila[1][0] = 5; //El objeto 0 vale 5
 		mochila[1][1] = 4;
@@ -31,8 +31,8 @@ public class Mochila {
 	}
 	
 	public void back(int etapa,int[]sol,int[]solOp){
-		if(etapa==sol.length){ //El caso base es cuando tengo una combinación de objetos
-			if(calcularpeso(sol)<=size){
+		if(etapa==sol.length){ //El caso base es cuando tengo una combinaciï¿½n de objetos
+			if(calcularpeso(sol)==size){
 				if(esMejor(sol,solOp)){
 					System.arraycopy(sol, 0, solOp, 0, sol.length);
 					
@@ -50,6 +50,11 @@ public class Mochila {
 			}
 		}
 	}
+	
+	public void forward(){
+		
+	}
+	
 	public boolean puedometer (int [] sol, int etapa, int p) {
 		int peso = 0;
 		

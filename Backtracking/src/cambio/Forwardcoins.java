@@ -9,7 +9,7 @@ public class Forwardcoins {
     
     public static void main(String[] args) {
            
-        int devolucion = 7;
+        int devolucion = 10;
         int [][] m = new int [monedas.length][devolucion];
         generar_tabla (m , devolucion);
         printmatrix (m,devolucion);
