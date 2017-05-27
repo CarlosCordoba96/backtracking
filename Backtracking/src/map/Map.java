@@ -42,7 +42,7 @@ public class Map {
 			ArrayList<City> adjacents = adjacents(c);
 			for(int i = 0; i < adjacents.size(); i++){
 				City aux = backward(adjacents.get(i).getId());
-				if(c.getCost() == 0 || aux.getCost() + distances[v][aux.getId()] > c.getCost()){
+				if(c.getCost() == 0 || aux.getCost() + distances[v][aux.getId()] < c.getCost()){
 					c.setCost(aux.getCost() + distances[v][aux.getId()]);
 					c.setNext(aux);
 				}
@@ -72,7 +72,7 @@ public class Map {
 			ArrayList<City> cities = adjacents(c);
 			for(int i = 0; i < cities.size(); i++){
 				City aux = cities.get(i);
-				if(aux.getCost() == 0 || c.getCost() + distances[c.getId()][aux.getId()] > aux.getCost()){
+				if(aux.getCost() == 0 || c.getCost() + distances[c.getId()][aux.getId()] < aux.getCost()){
 					aux.setCost(c.getCost() + distances[c.getId()][aux.getId()]);
 					aux.setNext(c);
 				}
