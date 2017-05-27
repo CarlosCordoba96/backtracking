@@ -5,8 +5,8 @@ import java.util.LinkedList;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		descomponer d =new descomponer(17);
+		int prueba=1*2*2*2*2/3*2/3*2;
+		descomponer d =new descomponer(prueba);
 		LinkedList<Integer> sol=new LinkedList<Integer>();
 		LinkedList<Integer> solopt=new LinkedList<Integer>();
 		d.back( sol, solopt);

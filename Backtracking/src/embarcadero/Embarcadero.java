@@ -35,8 +35,8 @@ public class Embarcadero {
 			System.out.print(SolOptima[j]+" ");
 		}
 		System.out.println("Precio: "+CalculaPrecioTotal(SolOptima));
-		System.out.println(forward());
-		System.out.println(backward(3));
+		Balsa solus=backward(1);
+		System.out.println("Solucion es : "+ (1+solus.getCost()));
 	}
 	
 	private int CalculaPrecioTotal(int sol []){
@@ -114,13 +114,14 @@ public class Embarcadero {
 	
 	private Balsa backward(int n){
 		Balsa b=getBalsas().get(n);
+		
 		if(b.getCost()==0){
 			ArrayList<Balsa>ady=adyacentes(b);
 			for(int i=0;i<ady.size();i++){
-				Balsa aux=ady.get(i);
+				Balsa aux=backward(ady.get(i).getId());
 				if(aux.getCost()==0|| b.getCost() + precios[b.getId()][aux.getId()]<aux.getCost()){
-					aux.setCost(b.getCost() + precios[b.getId()][aux.getId()]);
-					aux.setNext(b);
+					b.setCost(b.getCost() + precios[b.getId()][aux.getId()]);
+					b.setNext(aux);
 				}
 			}
 			
